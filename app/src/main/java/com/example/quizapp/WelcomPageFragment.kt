@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,6 @@ class WelcomPageFragment : Fragment() {
         button1 = view.findViewById(R.id.button)
 
 
-
         editText.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().trim({ it <= ' ' }).isEmpty()) {
@@ -55,6 +55,20 @@ class WelcomPageFragment : Fragment() {
             }
         })
 
+        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                val catagoryFragment = com.example.quizapp.CatagoryFragment()
+                val transaction2 = activity?.supportFragmentManager?.beginTransaction()
+
+                transaction2?.replace(R.id.frameLayout, catagoryFragment, "pinkFragment")
+                if (transaction2 != null) {
+                    transaction2.commit()
+                }
+                return@OnKeyListener true
+            }
+            false
+        })
+
 button1.setOnClickListener{
     val catagoryFragment = com.example.quizapp.CatagoryFragment()
     val transaction2 = activity?.supportFragmentManager?.beginTransaction()
@@ -65,13 +79,6 @@ button1.setOnClickListener{
     }
 
 }
-         /*   button1.setOnClickListener {
-                val intent = Intent(activity, QuizQuestion::class.java)
-                //intent.putExtra(SyncStateContract.Constants.User_Name, extractEditText.text.toString())
-                startActivity(intent)
-                activity?.finish()
-
-            }*/
 
         return view
         }

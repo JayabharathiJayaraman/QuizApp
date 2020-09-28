@@ -49,6 +49,9 @@ class QuizQuestion : AppCompatActivity() , View.OnClickListener{
         defaultOptionsView()
         if(mCurrentPosition == mQuestionList!!.size)
         {
+            button2.text="FINISH"
+        }else
+        {
             button2.text = "SUBMIT"
         }
         progressBar.progress = mCurrentPosition
@@ -72,6 +75,7 @@ class QuizQuestion : AppCompatActivity() , View.OnClickListener{
         }
 
     }
+    //added timer to answer the questions
     fun startTimer(){
         mCountDownTimer=  object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -80,6 +84,7 @@ class QuizQuestion : AppCompatActivity() , View.OnClickListener{
 
             override fun onFinish() {
                 TODO("Not yet implemented")
+                //Toast
             }
 
 
