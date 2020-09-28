@@ -4,8 +4,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.graphics.Typeface
+import android.graphics.drawable.shapes.Shape
+import android.icu.lang.UCharacter.DecompositionType.CIRCLE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -14,22 +17,24 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_quiz_question.*
 
 class QuizQuestion : AppCompatActivity() , View.OnClickListener{
-
     private var mCurrentPosition :  Int =1
     private var mQuestionList: ArrayList<Question> ?= null
     private var mSelectedOptionPosition : Int = 0
     private var mCorrectAnswer : Int = 0
-private var mUserName: String? = null
+    private var mUserName: String? = null
+    private var mCountDownTimer: CountDownTimer? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
 
         mUserName = intent.getStringExtra(Constants.User_Name)
-       // val questionList = Constants.getQuestions()
+        // val questionList = Constants.getQuestions()
         mQuestionList = Constants.getQuestions()
-       // Log.d("!!!", "Hej")
+        // Log.d("!!!", "Hej")
         setQuestion()
+        startTimer()
         textViewOptionOne.setOnClickListener(this)
         textViewOptionTwo.setOnClickListener(this)
         textViewOptionThree.setOnClickListener(this)
@@ -44,8 +49,6 @@ private var mUserName: String? = null
         defaultOptionsView()
         if(mCurrentPosition == mQuestionList!!.size)
         {
-            button2.text = "FINISH"
-        } else {
             button2.text = "SUBMIT"
         }
         progressBar.progress = mCurrentPosition
@@ -69,11 +72,27 @@ private var mUserName: String? = null
         }
 
     }
+    fun startTimer(){
+        mCountDownTimer=  object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000)
+            }
+
+            override fun onFinish() {
+                TODO("Not yet implemented")
+            }
+
+
+        }.start()
+
+    }
+
 
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.textViewOptionOne -> {
                 selectedOptionView(textViewOptionOne, 1)
+
             }
             R.id.textViewOptionTwo -> {
                 selectedOptionView(textViewOptionTwo, 2)
@@ -85,53 +104,56 @@ private var mUserName: String? = null
                 selectedOptionView(textViewOptionFour, 4)
             }
             R.id.button2 -> {
-                 if(mSelectedOptionPosition == 0 )
-                 {
-                     mCurrentPosition++
-                     when{
-                         mCurrentPosition <= mQuestionList!!.size -> {
-                             setQuestion()
-                         } else -> {
-                         val intent = Intent(this, ResultActivity::class.java)
-                         intent.putExtra(Constants.User_Name, mUserName)
-                         intent.putExtra(Constants.Correct_Answers, mCorrectAnswer)
-                         intent.putExtra(Constants.Total_Questions, mQuestionList!!.size)
-                         startActivity(intent)
-                         finish()
+                if(mSelectedOptionPosition == 0 )
+                {
+                    mCurrentPosition++
+                    startTimer()
+                    when{
+                        mCurrentPosition <= mQuestionList!!.size -> {
+                            setQuestion()
+                        } else -> {
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra(Constants.User_Name, mUserName)
+                        intent.putExtra(Constants.Correct_Answers, mCorrectAnswer)
+                        intent.putExtra(Constants.Total_Questions, mQuestionList!!.size)
+                        startActivity(intent)
+                        finish()
 
-                         //Toast.makeText(this, "Congrats! You have completed the quiz!", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Congrats! You have completed the quiz!", Toast.LENGTH_SHORT).show()
 
-                     }
-                     }
-                 } else {
-                     val question = mQuestionList?.get(mCurrentPosition-1)
-                     if (question!!.correctAnswer != mSelectedOptionPosition)
-                     {
-                         answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
-                     } else {
-                         mCorrectAnswer ++
-                     }
-                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
-                     if(mCurrentPosition == mQuestionList!!.size)
-                     {
-                         button2.text = "FINISH"
-                     } else {
-                            button2.text = "GO TO NEXT QUESTION"
-                     }
-                     mSelectedOptionPosition = 0
-                 }
+                    }
+                    }
+                } else {
+                    val question = mQuestionList?.get(mCurrentPosition-1)
+                    if (question!!.correctAnswer != mSelectedOptionPosition)
+                    {
+                        answerView(mSelectedOptionPosition,R.drawable.wrong_option_border_bg)
+                        mCountDownTimer?.cancel()
+                    } else {
+                        mCorrectAnswer ++
+                    }
+                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+                    mCountDownTimer?.cancel()
+                    if(mCurrentPosition == mQuestionList!!.size)
+                    {
+                        button2.text = "FINISH"
+                    } else {
+                        button2.text = "GO TO NEXT QUESTION"
+                    }
+                    mSelectedOptionPosition = 0
+                }
             }
 
         }
     }
-private fun answerView(answer: Int, drawableView:Int){
-    when(answer){
-        1-> textViewOptionOne.background = ContextCompat.getDrawable(this, drawableView)
-        2-> textViewOptionTwo.background = ContextCompat.getDrawable(this, drawableView)
-        3-> textViewOptionThree.background = ContextCompat.getDrawable(this, drawableView)
-        4-> textViewOptionFour.background = ContextCompat.getDrawable(this, drawableView)
+    private fun answerView(answer: Int, drawableView:Int){
+        when(answer){
+            1-> textViewOptionOne.background = ContextCompat.getDrawable(this, drawableView)
+            2-> textViewOptionTwo.background = ContextCompat.getDrawable(this, drawableView)
+            3-> textViewOptionThree.background = ContextCompat.getDrawable(this, drawableView)
+            4-> textViewOptionFour.background = ContextCompat.getDrawable(this, drawableView)
+        }
     }
-}
     private fun selectedOptionView (tv: TextView, selectedOptionNum: Int){
         defaultOptionsView()
         mSelectedOptionPosition = selectedOptionNum
