@@ -5,26 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/unnamed"
     tools:context=".MainActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="307dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/quizpic" />
-
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="405dp"
-        android:layout_height="570dp"
+        android:layout_width="387dp"
+        android:layout_height="546dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
@@ -33,6 +21,17 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="257dp"
+        android:layout_height="139dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/images4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

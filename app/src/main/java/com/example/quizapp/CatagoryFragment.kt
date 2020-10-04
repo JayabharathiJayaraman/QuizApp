@@ -20,7 +20,7 @@ class CatagoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("!!!", "Fragment12")
+
         val view = inflater.inflate(R.layout.catagory_fragment, container, false)
         image1 = view.findViewById(R.id.imageView3)
         image2=view.findViewById(R.id.imageView4)

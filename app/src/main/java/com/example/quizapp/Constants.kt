@@ -11,30 +11,30 @@ object Constants {
     fun getQuestions(): ArrayList<Question>{
     val questionList = ArrayList<Question>()
         val question1 = com.example.quizapp.Question(
-            1, "What is 1+1", R.drawable.quizpic, "3", "4", "2", "20",
-            3
+            1, "1.What are the two languages that Android Studio supports", R.drawable.images2, "Kotlin and Phython", "Kotlin and Java", "Phython and Php", "kotlin and JavaScript",
+            2
         )
         questionList.add(question1)
 
           val question2 = com.example.quizapp.Question(
-              1, "What is 4+5", R.drawable.quizpic, "3", "9", "6", "20",
-              2
+              1, "2.You can create an emulator to simulate the configuration of a particular type of Android device using a tool like ___.", R.drawable.quizpic, "Theme Editor", "Android SDK Manager", "AVD Manager", "Virtual Edito",
+              3
           )
         questionList.add(question2)
 
         val question3 = com.example.quizapp.Question(
-            1, "What is 4+5", R.drawable.quizpic, "3", "9", "6", "20",
-            2
+            1, "3.Which file do you alter the image displayed by the ImageView in?", R.drawable.quizpic, "AndroidManifest.xml", "MainActivity", "Activity_Main.xml", "Drawable",
+            3
         )
         questionList.add(question3)
         val question4 = com.example.quizapp.Question(
-            1, "What is 4+5", R.drawable.quizpic, "3", "9", "6", "20",
+            1, "4.Which component property should be changed to a name that is specific of the components use?", R.drawable.quizpic, "Content Description", "ID", "Text", "Editable",
             2
         )
         questionList.add(question4)
         val question5= com.example.quizapp.Question(
-            1, "What is 4+5", R.drawable.quizpic, "3", "9", "6", "20",
-            2
+            1, "5.Which listener is called for the device to register the enter key press?", R.drawable.quizpic, "OnClickListener", "OnHoverListener", "OnContextClickListener", "OnKeyListener",
+            4
         )
         questionList.add(question5)
         return questionList

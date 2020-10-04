@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/unnamed"
     tools:context=".ResultActivity">
 
     <TextView
@@ -23,8 +24,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="288dp"
-        android:layout_height="297dp"
+        android:layout_width="271dp"
+        android:layout_height="282dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="User Name"
         android:textColor="@android:color/white"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -68,7 +68,6 @@
         android:layout_marginBottom="36dp"
         android:background="@android:color/white"
         android:text="FINISH"
-        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,8 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="Your Score is 9 out of 10"
-        android:textColor="@android:color/secondary_text_dark"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

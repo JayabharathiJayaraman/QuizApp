@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    https://developer.android.com/courses/quizzes/android-kotlin-fundamental
 
     <TextView
         android:id="@+id/textView"
@@ -12,8 +13,8 @@
         android:layout_marginBottom="40dp"
         android:gravity="center"
         android:text="Welcome"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +29,8 @@
         android:layout_marginBottom="100dp"
         android:gravity="center"
         android:text="Please enter your name"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/extractEditText"
         app:layout_constraintStart_toStartOf="parent" />
@@ -37,12 +38,11 @@
 
     <android.inputmethodservice.ExtractEditText
         android:id="@+id/extractEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="editTextField"
-
-        android:layout_marginStart="32dp"
+        android:layout_width="306dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="52dp"
         android:layout_marginBottom="52dp"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -52,9 +52,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="112dp"
         android:text="Play"
-android:enabled="false"
+        android:enabled="false"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"

@@ -24,7 +24,7 @@ class WelcomPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("!!!", "Fragment12")
+
         val view = inflater.inflate(R.layout.welcomepage_fragment, container, false)
         //return super.onCreateView(inflater, container, savedInstanceState)
         nameText = view.findViewById(R.id.textView)

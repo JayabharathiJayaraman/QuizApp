@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.frameLayout, welcomePageFragment, "pinkFragment")
         transaction.commit()
 
-
-
     }
 
 
