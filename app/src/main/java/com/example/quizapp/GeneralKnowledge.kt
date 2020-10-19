@@ -23,6 +23,7 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
     private var mUserName: String? = null
     private var mCountDownTimer: CountDownTimer? = null
     private var mSkipedQuestion: Int = 0
+    private var mTimeOutQuestion: Int = 0
     private var mWrongAnswer: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,7 +91,7 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
             override fun onFinish() {
                 toast.show()
                 question()
-
+                mTimeOutQuestion++
             }
 
 
@@ -116,6 +117,8 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
                 selectedOptionView(textViewOptionFour, 4)
             }
             R.id.button2 -> {
+                mSkipedQuestion++
+                mCountDownTimer?.cancel()
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
                     startTimer()
@@ -129,7 +132,8 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
                             intent.putExtra(ConstantsGK.User_Name, mUserName)
                             intent.putExtra(ConstantsGK.Correct_Answers, mCorrectAnswer)
                             intent.putExtra(ConstantsGK.Total_Questions, mQuestionList!!.size)
-                            intent.putExtra(ConstantsGK.TimeOut_Answers, mSkipedQuestion)
+                            intent.putExtra(ConstantsGK.TimeOut_Answers, mTimeOutQuestion)
+                            intent.putExtra(ConstantsGK.Skipped_Questions, mSkipedQuestion)
                             intent.putExtra(ConstantsGK.Wrong_Answers,mWrongAnswer)
                             startActivity(intent)
                             mCountDownTimer?.cancel()

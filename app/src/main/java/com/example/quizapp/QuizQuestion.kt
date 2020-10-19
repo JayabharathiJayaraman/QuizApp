@@ -30,7 +30,7 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
     private var mCountDownTimer: CountDownTimer? = null
     private var mSkipedQuestion: Int = 0
     private var mWrongAnswer: Int = 0
-
+    private var mTimeOutQuestion: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +99,7 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
             override fun onFinish() {
                 toast.show()
                 question()
-                mSkipedQuestion++
+               mTimeOutQuestion++
 
             }
 
@@ -122,6 +122,7 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
                 selectedOptionView(textViewOptionFour, 4)
             }
             R.id.button2 -> {
+                mSkipedQuestion++
                 mCountDownTimer?.cancel()
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
@@ -133,14 +134,11 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
                         }
                         else -> {
                             val intent = Intent(this, ResultActivity::class.java)
-                            //Log.d("!!!","${extractEditText.text}")
-                            //intent.putExtra(Constants.User_Name, extractEditText.text)
-
-//                            Log.d("!!!","${extractEditText.text}")
                             intent.putExtra(Constants.Correct_Answers, mCorrectAnswer)
-                            intent.putExtra(Constants.TimeOut_Answers, mSkipedQuestion)
+                            intent.putExtra(Constants.TimeOut_Answers, mTimeOutQuestion)
                             intent.putExtra(Constants.Total_Questions, mQuestionList!!.size)
                             intent.putExtra(Constants.Wrong_Answers,mWrongAnswer)
+                            intent.putExtra(Constants.Skipped_Questions,mSkipedQuestion)
                             startActivity(intent)
                             mCountDownTimer?.cancel()
 

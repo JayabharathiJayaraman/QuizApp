@@ -10,6 +10,7 @@ object Constants {
     const val Correct_Answers: String = "corrects_answers"
     const val TimeOut_Answers: String = "timeout_answers"
     const val Wrong_Answers: String = "wrong_answers"
+    const val Skipped_Questions: String = "skipped_questions"
     fun getQuestions(): ArrayList<Question>{
     val questionList = ArrayList<Question>()
         val question1 = com.example.quizapp.Question(
