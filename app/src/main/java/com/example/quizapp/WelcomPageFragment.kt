@@ -11,9 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.quizapp.R
+import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class WelcomPageFragment : Fragment() {
     lateinit var nameText: TextView
@@ -35,7 +37,6 @@ class WelcomPageFragment : Fragment() {
         editText.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().trim({ it <= ' ' }).isEmpty()) {
-                    Log.d("!!!", "Fragment1")
 
                     button1.setEnabled(false)
                 } else {

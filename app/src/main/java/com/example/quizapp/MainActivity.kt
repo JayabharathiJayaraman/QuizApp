@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class MainActivity : AppCompatActivity() {
-
+    private var mUserName: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,32 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         transaction.add(R.id.frameLayout, welcomePageFragment, "pinkFragment")
         transaction.commit()
-
     }
 
 
-    /*editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-        if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-            //Perform Code
-            return@OnKeyListener true
-        }
-        false
-    })*/
-    /*fun playButton(){
-        button.setOnClickListener {
-
-            if(extractEditText.text.toString().isEmpty())
-            {
-                Toast.makeText(this, "Please enter the name", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                val intent = Intent(this,QuizQuestion::class.java)
-                intent.putExtra(Constants.User_Name, extractEditText.text.toString())
-                startActivity(intent)
-                finish()
-            }
-        }
-    }*/
 }
 
 

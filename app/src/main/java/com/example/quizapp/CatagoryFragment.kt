@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-
 import com.example.quizapp.com.example.quizapp.GeneralKnowledge
+
 
 class CatagoryFragment : Fragment() {
     lateinit var image1 : ImageView
@@ -33,10 +33,11 @@ class CatagoryFragment : Fragment() {
         }
 
         image2.setOnClickListener{
-            val intent1 = Intent(activity, GeneralKnowledge::class.java)
+            Log.d("!!!", "GK activity")
+            val intent = Intent(activity, GeneralKnowledge::class.java)
             //intent.putExtra(SyncStateContract.Constants.User_Name, extractEditText.text.toString())
-            startActivity(intent1)
-            activity?.finish()
+            startActivity(intent)
+            //activity?.finish()
         }
 
         return view
