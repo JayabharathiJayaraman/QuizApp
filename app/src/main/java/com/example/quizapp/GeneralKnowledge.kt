@@ -20,9 +20,7 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
     private var mQuestionList: ArrayList<Question> ?= null
     private var mSelectedOptionPosition : Int = 0
     private var mCorrectAnswer : Int = 0
-    private var mUserName: String? = null
     private var mCountDownTimer: CountDownTimer? = null
-    private var mSkipedQuestion: Int = 0
     private var mTimeOutQuestion: Int = 0
     private var mWrongAnswer: Int = 0
 
@@ -31,8 +29,6 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        mUserName = intent.getStringExtra(ConstantsGK.User_Name)
-        // val questionList = Constants.getQuestions()
         mQuestionList = ConstantsGK.getQuestions()
         setQuestion()
         startTimer()
@@ -117,7 +113,6 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
                 selectedOptionView(textViewOptionFour, 4)
             }
             R.id.button2 -> {
-                mSkipedQuestion++
                 mCountDownTimer?.cancel()
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
@@ -129,11 +124,9 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
                         }
                         else -> {
                             val intent = Intent(this, ResultActivity::class.java)
-                            intent.putExtra(ConstantsGK.User_Name, mUserName)
                             intent.putExtra(ConstantsGK.Correct_Answers, mCorrectAnswer)
                             intent.putExtra(ConstantsGK.Total_Questions, mQuestionList!!.size)
                             intent.putExtra(ConstantsGK.TimeOut_Answers, mTimeOutQuestion)
-                            intent.putExtra(ConstantsGK.Skipped_Questions, mSkipedQuestion)
                             intent.putExtra(ConstantsGK.Wrong_Answers,mWrongAnswer)
                             startActivity(intent)
                             mCountDownTimer?.cancel()

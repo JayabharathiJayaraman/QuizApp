@@ -17,8 +17,7 @@ class CatagoryFragment : Fragment() {
 
     lateinit var image1 : ImageView
     lateinit var image2 : ImageView
-     val mPlayerName: String? = "playername"
-    //val catagory: WelcomPageFragment ? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +36,6 @@ class CatagoryFragment : Fragment() {
 
         image2.setOnClickListener{
             val intent = Intent(activity, GeneralKnowledge::class.java)
-            intent.putExtra((activity as MainActivity).mUserName, mPlayerName)
             startActivity(intent)
             //activity?.finish()
         }

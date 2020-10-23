@@ -26,9 +26,8 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
     private var mQuestionList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswer: Int = 0
-     var mUserNam: String? = "musername"
+
     private var mCountDownTimer: CountDownTimer? = null
-    private var mSkipedQuestion: Int = 0
     private var mWrongAnswer: Int = 0
     private var mTimeOutQuestion: Int = 0
      var catagory: CatagoryFragment ? = null
@@ -37,10 +36,7 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        //mUserName = intent.getStringExtra(Constants.User_Name)
 
-
-        // val questionList = Constants.getQuestions()
         mQuestionList = Constants.getQuestions()
 
         setQuestion()
@@ -56,7 +52,6 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
 
 
     private fun setQuestion() {
-        //mCurrentPosition = 1
         val question = mQuestionList!![mCurrentPosition - 1]
         defaultOptionsView()
         if (mCurrentPosition == mQuestionList!!.size) {
@@ -139,10 +134,6 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
                             intent.putExtra(Constants.TimeOut_Answers, mTimeOutQuestion)
                             intent.putExtra(Constants.Total_Questions, mQuestionList!!.size)
                             intent.putExtra(Constants.Wrong_Answers,mWrongAnswer)
-                            intent.putExtra(Constants.Skipped_Questions,mSkipedQuestion)
-                            val userName = intent.getStringExtra(catagory?.mPlayerName)
-                            intent.putExtra(Constants.User_Name, userName)
-                            Log.d("!!!","$Constants.User_Name")
                             startActivity(intent)
                             mCountDownTimer?.cancel()
 

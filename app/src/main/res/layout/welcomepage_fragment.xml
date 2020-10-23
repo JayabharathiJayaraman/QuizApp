@@ -33,11 +33,11 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintBottom_toBottomOf="@+id/extractEditText"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
+    <android.inputmethodservice.ExtractEditText
+        android:id="@+id/extractEditText"
         android:layout_width="306dp"
         android:layout_height="61dp"
         android:layout_marginStart="52dp"
