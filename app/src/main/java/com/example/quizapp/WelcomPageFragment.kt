@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class WelcomPageFragment : Fragment() {
     lateinit var nameText: TextView
-    lateinit var editText: ExtractEditText
+    //lateinit var editText: ExtractEditText
     lateinit var button1: Button
 
     override fun onCreateView(
@@ -31,12 +31,10 @@ class WelcomPageFragment : Fragment() {
         val view = inflater.inflate(R.layout.welcomepage_fragment, container, false)
         //return super.onCreateView(inflater, container, savedInstanceState)
         nameText = view.findViewById(R.id.textView)
-        editText = view.findViewById(R.id.extractEditText)
+   //     editText = view.findViewById(R.id.extractEditText)
         button1 = view.findViewById(R.id.button)
 
-
-
-        editText.addTextChangedListener(object : TextWatcher {
+/*         editText.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().trim({ it <= ' ' }).isEmpty()) {
 
@@ -58,7 +56,7 @@ class WelcomPageFragment : Fragment() {
             }
         })
 
-        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+       editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
 
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 val catagoryFragment = com.example.quizapp.CatagoryFragment()
@@ -72,7 +70,7 @@ class WelcomPageFragment : Fragment() {
                 return@OnKeyListener true
             }
             false
-        })
+        })*/
 
 button1.setOnClickListener{
 
