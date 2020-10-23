@@ -8,24 +8,23 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="162dp"
-        android:layout_height="286dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="170dp"
+        android:layout_height="305dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="96dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/androidstudiologo"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="139dp"
-        android:layout_height="252dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="181dp"
+        android:layout_height="251dp"
+        android:layout_marginTop="132dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gk1"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

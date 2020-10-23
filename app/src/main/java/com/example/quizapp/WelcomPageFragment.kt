@@ -19,8 +19,9 @@ import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class WelcomPageFragment : Fragment() {
     lateinit var nameText: TextView
-    lateinit var editText: ExtractEditText
+    lateinit var editText1: EditText
     lateinit var button1: Button
+    public var edittextResult : String ? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,11 +31,12 @@ class WelcomPageFragment : Fragment() {
         val view = inflater.inflate(R.layout.welcomepage_fragment, container, false)
         //return super.onCreateView(inflater, container, savedInstanceState)
         nameText = view.findViewById(R.id.textView)
-        editText = view.findViewById(R.id.extractEditText)
+        editText1 = view.findViewById(R.id.editText)
         button1 = view.findViewById(R.id.button)
 
 
-        editText.addTextChangedListener(object : TextWatcher {
+
+        editText1.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().trim({ it <= ' ' }).isEmpty()) {
 
@@ -56,12 +58,20 @@ class WelcomPageFragment : Fragment() {
             }
         })
 
-        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        editText1.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                edittextResult = editText1.getText().toString()
+                Log.d("!!!WP1","$edittextResult")
                 val catagoryFragment = com.example.quizapp.CatagoryFragment()
                 val transaction2 = activity?.supportFragmentManager?.beginTransaction()
+                edittextResult = editText1.getText().toString()
+                Log.d("!!!WP2","$edittextResult")
 
                 transaction2?.replace(R.id.frameLayout, catagoryFragment, "pinkFragment")
+                edittextResult = editText1.getText().toString()
+                Log.d("!!!WP3","$edittextResult")
+
                 if (transaction2 != null) {
                     transaction2.commit()
                 }
@@ -71,6 +81,9 @@ class WelcomPageFragment : Fragment() {
         })
 
 button1.setOnClickListener{
+    edittextResult = editText1.getText().toString()
+    Log.d("!!!WP4","$edittextResult")
+
     val catagoryFragment = com.example.quizapp.CatagoryFragment()
     val transaction2 = activity?.supportFragmentManager?.beginTransaction()
 

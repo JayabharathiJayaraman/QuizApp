@@ -21,16 +21,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.text.*
 
-class QuizQuestion : AppCompatActivity(), View.OnClickListener {
+class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
     private var mCurrentPosition: Int = 1
     private var mQuestionList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswer: Int = 0
-    private var mUserName: String? = null
+     var mUserNam: String? = "musername"
     private var mCountDownTimer: CountDownTimer? = null
     private var mSkipedQuestion: Int = 0
     private var mWrongAnswer: Int = 0
     private var mTimeOutQuestion: Int = 0
+     var catagory: CatagoryFragment ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,7 +123,7 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
                 selectedOptionView(textViewOptionFour, 4)
             }
             R.id.button2 -> {
-                mSkipedQuestion++
+
                 mCountDownTimer?.cancel()
                 if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
@@ -139,6 +140,9 @@ class QuizQuestion : AppCompatActivity(), View.OnClickListener {
                             intent.putExtra(Constants.Total_Questions, mQuestionList!!.size)
                             intent.putExtra(Constants.Wrong_Answers,mWrongAnswer)
                             intent.putExtra(Constants.Skipped_Questions,mSkipedQuestion)
+                            val userName = intent.getStringExtra(catagory?.mPlayerName)
+                            intent.putExtra(Constants.User_Name, userName)
+                            Log.d("!!!","$Constants.User_Name")
                             startActivity(intent)
                             mCountDownTimer?.cancel()
 

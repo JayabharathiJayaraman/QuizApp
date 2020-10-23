@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +10,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.quizapp.com.example.quizapp.GeneralKnowledge
+import com.example.quizapp.com.example.quizapp.WelcomPageFragment
 
 
 class CatagoryFragment : Fragment() {
+
     lateinit var image1 : ImageView
     lateinit var image2 : ImageView
-
+     val mPlayerName: String? = "playername"
+    //val catagory: WelcomPageFragment ? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,15 +31,13 @@ class CatagoryFragment : Fragment() {
 
         image1.setOnClickListener {
             val intent = Intent(activity, QuizQuestion::class.java)
-            //intent.putExtra(SyncStateContract.Constants.User_Name, extractEditText.text.toString())
             startActivity(intent)
             activity?.finish()
         }
 
         image2.setOnClickListener{
-            Log.d("!!!", "GK activity")
             val intent = Intent(activity, GeneralKnowledge::class.java)
-            //intent.putExtra(SyncStateContract.Constants.User_Name, extractEditText.text.toString())
+            intent.putExtra((activity as MainActivity).mUserName, mPlayerName)
             startActivity(intent)
             //activity?.finish()
         }

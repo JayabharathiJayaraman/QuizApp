@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class MainActivity : AppCompatActivity() {
-    private var mUserName: String? = null
+     var mUserName: String? = null
+    var catagory: WelcomPageFragment ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity() {
 
         transaction.add(R.id.frameLayout, welcomePageFragment, "pinkFragment")
         transaction.commit()
+        val input = editText?.text.toString().trim()
+        if (input.isNotEmpty()) {
+            mUserName = catagory?.edittextResult
+            Log.d("!!!in main","$mUserName")
+        }
     }
 
 
