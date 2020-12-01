@@ -1,26 +1,25 @@
 package com.example.quizapp.com.example.quizapp
 
-import com.example.quizapp.CatagoryFragment
 import android.inputmethodservice.ExtractEditText
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.quizapp.R
+import com.example.quizapp.*
 import kotlinx.android.synthetic.main.welcomepage_fragment.*
 
 class WelcomPageFragment : Fragment() {
     lateinit var nameText: TextView
     lateinit var editText: ExtractEditText
     lateinit var button1: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +55,7 @@ class WelcomPageFragment : Fragment() {
             }
         })
 
-       editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        editText.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
 
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 val catagoryFragment = com.example.quizapp.CatagoryFragment()
@@ -72,23 +71,27 @@ class WelcomPageFragment : Fragment() {
             false
         })
 
-button1.setOnClickListener{
+        button1.setOnClickListener {
+            val catagoryFragment = com.example.quizapp.CatagoryFragment()
+            val transaction2 = activity?.supportFragmentManager?.beginTransaction()
 
-    val catagoryFragment = com.example.quizapp.CatagoryFragment()
-    val transaction2 = activity?.supportFragmentManager?.beginTransaction()
+            transaction2?.replace(R.id.frameLayout, catagoryFragment, "pinkFragment")
+            if (transaction2 != null) {
+                transaction2.commit()
+            }
 
-    transaction2?.replace(R.id.frameLayout, catagoryFragment, "pinkFragment")
-    if (transaction2 != null) {
-        transaction2.commit()
+        }
+
+        return view
+
     }
+
 
 }
 
-        return view
-        }
 
 
-    }
+
 
 
 

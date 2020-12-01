@@ -13,7 +13,7 @@ object Constants {
     fun getQuestions(): ArrayList<Question>{
     val questionList = ArrayList<Question>()
         val question1 = com.example.quizapp.Question(
-            1, "1.What are the two languages that Android Studio supports", R.drawable.unnamed, "Kotlin and Phython", "Kotlin and Java", "Phython and Php", "kotlin and JavaScript",
+            1, "1.What are the two languages that Android Studio supports", R.drawable.unnamed, "Kotlin and Phython", "Kotlin and Java", "Kotlin and Java", "kotlin and JavaScript",
             2
         )
         questionList.add(question1)

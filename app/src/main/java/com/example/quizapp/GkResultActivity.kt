@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.quizapp.Constants
-import com.example.quizapp.ConstantsGK
-import com.example.quizapp.MainActivity
-import com.example.quizapp.R
+import com.example.quizapp.*
 import kotlinx.android.synthetic.main.activity_result.*
 
 class GkResultActivity : AppCompatActivity() {

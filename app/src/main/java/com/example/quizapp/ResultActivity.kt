@@ -3,12 +3,8 @@ package com.example.quizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
-import com.example.quizapp.com.example.quizapp.WelcomPageFragment
 import kotlinx.android.synthetic.main.activity_result.*
-import com.example.quizapp.QuizQuestion as QuizQuestion
 
 class ResultActivity : AppCompatActivity() {
 
@@ -21,7 +17,17 @@ class ResultActivity : AppCompatActivity() {
         val wrongAnswer = intent.getIntExtra(Constants.Wrong_Answers,0)
         val timeOutAnswer = intent.getIntExtra(Constants.TimeOut_Answers,0)
 
+        // Read Data from Room DB to display user name
+        val userDao = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val list =  userDao?.getUserData()
 
+         val sb = StringBuffer()
+        list?.forEach {
+
+            sb.append(it.toString())
+
+        }
+        textView7.text = sb.toString()
         textView8.text = "Your Score is $correctAnswer out of $totalQuestions"
         timeOutTextView.text = "Time out questions $timeOutAnswer"
         wrongAnswerView.text = "Wrong Answers $wrongAnswer"

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_quiz_question.*
 import kotlinx.android.synthetic.main.activity_quiz_question.timer
+import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.android.synthetic.main.welcomepage_fragment.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,19 +24,31 @@ import kotlin.text.*
 
 class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
     private var mCurrentPosition: Int = 1
-    private var mQuestionList: ArrayList<Question>? = null
+   private var mQuestionList: ArrayList<Question>? = null
+
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswer: Int = 0
 
     private var mCountDownTimer: CountDownTimer? = null
     private var mWrongAnswer: Int = 0
     private var mTimeOutQuestion: Int = 0
-     var catagory: CatagoryFragment ? = null
+    var catagory: CatagoryFragment ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+
+        //Room DB to display questions
+        val userDao = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val list =  userDao?.getAndroidQuestions()
+
+        val sb = StringBuffer()
+        list?.forEach {
+
+            sb.append(it.toString())
+
+        }
 
         mQuestionList = Constants.getQuestions()
 
@@ -59,6 +72,16 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
         } else {
             button2.text = "SUBMIT"
         }
+
+        /*val userDao = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val list =  userDao?.getQuestions()
+
+        // val sb = StringBuffer()
+        list?.forEach {
+
+            //sb.append(it.toString())
+            textView3.append("${it. }")
+        }*/
         progressBar.progress = mCurrentPosition
         textView4.text = "$mCurrentPosition" + "/" + progressBar.max
         textView3.text = question!!.question
