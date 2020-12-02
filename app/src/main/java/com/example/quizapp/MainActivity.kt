@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    // val quizDatabase : QuizDatabase
+    //val quizDatabase : QuizDatabase
+
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
 
@@ -25,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.frameLayout, welcomePageFragment, "pinkFragment")
         transaction.commit()
 
-        welcomePageFragment.button.setOnClickListener {
+        /*welcomePageFragment.button1.setOnClickListener {
             insertUserDataToDatabase()
-            insertAndroidQuestionsToDB()
-            insertGkQuestionsToDB()
-        }
+       //     insertAndroidQuestionsToDB()
+         //   insertGkQuestionsToDB()
+        }*/
 
 
         //quizDatabase = Room.databaseBuilder(applicationContext,QuizDatabase::class.java,"Quiz_Database").allowMainThreadQueries().build()
@@ -37,15 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun insertUserDataToDatabase() {
-        val welcomePageFragment = WelcomPageFragment()
-        val quizUserName =welcomePageFragment.editText
-        val quizDao= QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
-        val user = User(0,quizUserName)
-        quizDao?.insertUser(user)
-    }
 
-    fun insertAndroidQuestionsToDB()
+
+/*    fun insertAndroidQuestionsToDB()
     {
         val quizDao= QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
         val qus1=  Catagory1Questions(0,"1.What are the two languages that Android Studio supports","Kotlin and Phython","Kotlin and Java","Kotlin and Java","kotlin and JavaScript")
@@ -58,9 +53,9 @@ class MainActivity : AppCompatActivity() {
         quizDao?.insertAndroidQuestions(qus3)
         quizDao?.insertAndroidQuestions(qus4)
         quizDao?.insertAndroidQuestions(qus5)
-    }
+    }*/
 
-    fun insertGkQuestionsToDB()
+    /*fun insertGkQuestionsToDB()
     {
         val quizDao= QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
         val qus1= Catagory2Questions(0,"1.What is the smallest country in the world?","USA","Vatican City","China","India")
@@ -74,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         quizDao?.insertGkQuestions(qus4)
         quizDao?.insertGkQuestions(qus5)
 
-    }
+    }*/
 
 }
 

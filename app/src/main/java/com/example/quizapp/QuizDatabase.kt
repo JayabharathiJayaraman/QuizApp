@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.quizapp.com.example.quizapp.WelcomPageFragment
 
-
-@Database(entities = [User::class, Catagory1Questions::class, Catagory2Questions::class], version = 1)
+@Database(entities = [User::class, Catagory1Questions::class, Catagory2Questions::class], version = 5)
+//@Database(entities = [User::class, Catagory1Questions::class, Catagory2Questions::class], version = 1)
 abstract class QuizDatabase: RoomDatabase() {
     abstract fun quizDao(): QuizDao
 
@@ -20,6 +20,7 @@ abstract class QuizDatabase: RoomDatabase() {
                     context.applicationContext, QuizDatabase::class.java,"quiz_database"
                 )
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
 
             }

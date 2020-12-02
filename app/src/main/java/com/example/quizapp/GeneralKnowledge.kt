@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -17,7 +18,8 @@ import kotlin.collections.ArrayList
 
 class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
     private var mCurrentPosition :  Int =1
-    private var mQuestionList: ArrayList<Question> ?= null
+    //private var mQuestionList: ArrayList<Question> ?= null
+    private lateinit var mQuestionList : List<Catagory2Questions>
     private var mSelectedOptionPosition : Int = 0
     private var mCorrectAnswer : Int = 0
     private var mCountDownTimer: CountDownTimer? = null
@@ -29,7 +31,11 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        mQuestionList = ConstantsGK.getQuestions()
+        //mQuestionList = ConstantsGK.getQuestions()
+
+        deleteCatagory2Questions()
+        insertGkQuestionsToDB()
+        getCatagory2Questions()
         setQuestion()
         startTimer()
         textViewOptionOne.setOnClickListener(this)
@@ -40,9 +46,40 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
 
     }
 
+    fun deleteCatagory2Questions(){
+        val deleteQuestions = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        deleteQuestions?.deleteCatagory2Questions()
+    }
+
+    fun insertGkQuestionsToDB()
+    {
+        val quizDao= QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val qus1= Catagory2Questions(0,"1.What is the smallest country in the world?","USA","Vatican City","China","India",2)
+        val qus2= Catagory2Questions(1,"2.What is the hottest continent on Earth?","Asia","Antarctica","North America","Africa",4)
+        val qus3= Catagory2Questions(2,"3.What is the longest river in the world?","River Nile","Yellow River","Congo River","Lena River",1)
+        val qus4= Catagory2Questions(3,"4.Who won the FIFA Women's World Cup in 2019?","New zealand","Austrialia","USA","Brazil",3)
+        val qus5= Catagory2Questions(4,"5.Which planet is closest to the sun?","Venus","Mercury","Saturne","Neptune",2)
+        quizDao?.insertGkQuestions(qus1)
+        quizDao?.insertGkQuestions(qus2)
+        quizDao?.insertGkQuestions(qus3)
+        quizDao?.insertGkQuestions(qus4)
+        quizDao?.insertGkQuestions(qus5)
+
+    }
+    fun getCatagory2Questions() {
+
+        val getquestions=  QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val h = getquestions?.getGkQuestions()
+        Log.d("h","$h")
+        if (h != null) {
+            mQuestionList = h
+        }
+
+    }
+
     private fun setQuestion(){
         //mCurrentPosition = 1
-        val question = mQuestionList !![mCurrentPosition - 1]
+        val question = mQuestionList!![mCurrentPosition - 1]
         defaultOptionsView()
         if(mCurrentPosition == mQuestionList!!.size)
         {
@@ -57,7 +94,7 @@ class GeneralKnowledge : AppCompatActivity() , View.OnClickListener{
         textViewOptionOne.text = question.optionOne
         textViewOptionTwo.text = question.optionTwo
         textViewOptionThree.text = question.optionThree
-        textViewOptionFour.text = question.optionFour
+        textViewOptionFour.text = question.optionfour
     }
     private fun defaultOptionsView(){
         val options = ArrayList<TextView>()

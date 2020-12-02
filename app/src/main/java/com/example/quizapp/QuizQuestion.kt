@@ -24,7 +24,9 @@ import kotlin.text.*
 
 class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
     private var mCurrentPosition: Int = 1
-   private var mQuestionList: ArrayList<Question>? = null
+   //private var mQuestionList: ArrayList<Question>? = null
+
+    private lateinit var mQuestionList : List<Catagory1Questions>
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswer: Int = 0
@@ -32,26 +34,17 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
     private var mCountDownTimer: CountDownTimer? = null
     private var mWrongAnswer: Int = 0
     private var mTimeOutQuestion: Int = 0
-    var catagory: CatagoryFragment ? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_question)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
-        //Room DB to display questions
-        val userDao = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
-        val list =  userDao?.getAndroidQuestions()
 
-        val sb = StringBuffer()
-        list?.forEach {
-
-            sb.append(it.toString())
-
-        }
-
-        mQuestionList = Constants.getQuestions()
-
+        deleteCatagory1Questions()
+        insertCatagory1QuestionsToDb()
+        getCatagory1Questions()
         setQuestion()
         startTimer()
         textViewOptionOne.setOnClickListener(this)
@@ -61,10 +54,42 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
         button2.setOnClickListener(this)
 
     }
+    fun deleteCatagory1Questions(){
+        val deleteQuestions = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        deleteQuestions?.deleteCatagory1Questions()
+    }
 
+
+
+fun insertCatagory1QuestionsToDb()
+{
+    val quizDao= QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+    val qus1=  Catagory1Questions(0,"1.What are the two languages that Android Studio supports","Kotlin and Phython","Kotlin and Java","Kotlin and Php","kotlin and JavaScript",2)
+    val qus2= Catagory1Questions(1,"2.You can create an emulator to simulate the configuration of a particular type of Android device using a tool like ___.","Theme Editor","Android SDK Manager","AVD Manager","Virtual Editor",3)
+    val qus3=Catagory1Questions(2,"3.Which file do you alter the image displayed by the ImageView in?","AndroidManifest.xml","MainActivity","Activity_Main.xml","Drawable",3)
+    val qus4=Catagory1Questions(3,"4.Which component property should be changed to a name that is specific of the components use?","Content Description","ID","Text","Editable",2)
+    val qus5=Catagory1Questions(4,"5.Which listener is called for the device to register the enter key press?","OnClickListener","OnHoverListener","OnContextClickListener","OnKeyListener",4)
+    quizDao?.insertAndroidQuestions(qus1)
+    quizDao?.insertAndroidQuestions(qus2)
+    quizDao?.insertAndroidQuestions(qus3)
+    quizDao?.insertAndroidQuestions(qus4)
+    quizDao?.insertAndroidQuestions(qus5)
+}
+
+    fun getCatagory1Questions() {
+
+        val getquestions=  QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
+        val h = getquestions?.getAndroidQuestions()
+        Log.d("h","$h")
+        if (h != null) {
+            mQuestionList = h
+        }
+
+        }
 
 
     private fun setQuestion() {
+
         val question = mQuestionList!![mCurrentPosition - 1]
         defaultOptionsView()
         if (mCurrentPosition == mQuestionList!!.size) {
@@ -73,22 +98,14 @@ class QuizQuestion :  AppCompatActivity(), View.OnClickListener  {
             button2.text = "SUBMIT"
         }
 
-        /*val userDao = QuizDatabase.getAppDatabase(applicationContext)?.quizDao()
-        val list =  userDao?.getQuestions()
 
-        // val sb = StringBuffer()
-        list?.forEach {
-
-            //sb.append(it.toString())
-            textView3.append("${it. }")
-        }*/
         progressBar.progress = mCurrentPosition
         textView4.text = "$mCurrentPosition" + "/" + progressBar.max
         textView3.text = question!!.question
         textViewOptionOne.text = question.optionOne
         textViewOptionTwo.text = question.optionTwo
         textViewOptionThree.text = question.optionThree
-        textViewOptionFour.text = question.optionFour
+        textViewOptionFour.text = question.optionfour
     }
 
     private fun defaultOptionsView() {

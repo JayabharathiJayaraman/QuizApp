@@ -1,31 +1,40 @@
 package com.example.quizapp
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 
 @Dao
 interface QuizDao {
 
-    //@Query("SELECT * FROM user where id= :id")
-    //fun getUserData(id: Long): List<User>
+//User Name
 
     @Query("SELECT * FROM user")
     fun getUserData(): List<User>
 
-    @Query("SELECT * FROM androidQuestions ORDER BY id desc")
-    fun getAndroidQuestions(): List<User>
-
-    @Query("SELECT * FROM gkQuestions ORDER BY id desc")
-    fun getGkQuestions(): List<User>
+    @Query("DELETE FROM user")
+    fun deleteUser()
 
     @Insert
-     fun insertUser(user: User)
+    fun insertUser(user: User)
+
+    //Catagory1
+    @Query("SELECT * FROM androidQuestions")
+    fun getAndroidQuestions(): List<Catagory1Questions>
 
     @Insert
     fun insertAndroidQuestions(quizAndroidcatagory: Catagory1Questions)
 
+    @Query("DELETE FROM androidQuestions")
+    fun deleteCatagory1Questions()
+
+    //Catagory2
+    @Query("SELECT * FROM gkQuestions")
+    fun getGkQuestions(): List<Catagory2Questions>
+
     @Insert
     fun insertGkQuestions(quizGkcatagory: Catagory2Questions)
+
+    @Query("DELETE FROM gkQuestions")
+    fun deleteCatagory2Questions()
+
 }

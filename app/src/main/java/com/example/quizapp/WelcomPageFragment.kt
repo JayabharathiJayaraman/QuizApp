@@ -1,32 +1,44 @@
 package com.example.quizapp.com.example.quizapp
 
-import android.inputmethodservice.ExtractEditText
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.quizapp.*
+import kotlinx.android.synthetic.main.activity_result.*
 import kotlinx.android.synthetic.main.welcomepage_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
-class WelcomPageFragment : Fragment() {
+
+class WelcomPageFragment : Fragment()  , CoroutineScope {
+
+    private lateinit var job : Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     lateinit var nameText: TextView
-    lateinit var editText: ExtractEditText
-    lateinit var button1: Button
-
+    private lateinit var editText: EditText
+public lateinit var button1: Button
+lateinit var  quizDatabase : QuizDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        job = Job()
+        //quizDatabase = Room.databaseBuilder(activity?.applicationContext!!,QuizDatabase::class.java,"Quiz_Database").fallbackToDestructiveMigration().build()
         val view = inflater.inflate(R.layout.welcomepage_fragment, container, false)
         //return super.onCreateView(inflater, container, savedInstanceState)
         nameText = view.findViewById(R.id.textView)
@@ -72,6 +84,11 @@ class WelcomPageFragment : Fragment() {
         })
 
         button1.setOnClickListener {
+            val name = editText.text.toString()
+            val user =User(0, name)
+            deleteUser()
+            insertUserDataToDatabase(user)
+
             val catagoryFragment = com.example.quizapp.CatagoryFragment()
             val transaction2 = activity?.supportFragmentManager?.beginTransaction()
 
@@ -85,8 +102,27 @@ class WelcomPageFragment : Fragment() {
         return view
 
     }
+    fun deleteUser(){
 
+        val deleteUser = QuizDatabase.getAppDatabase(activity?.applicationContext!!)?.quizDao()
+        deleteUser?.deleteUser()
 
+    }
+
+     fun insertUserDataToDatabase(user: User) {
+         Log.d("!!!","success")
+         val quizDao= QuizDatabase.getAppDatabase(activity?.applicationContext!!)?.quizDao()
+        // val quizUserName =editText.text
+        //val quizDao= activity?.let { QuizDatabase.getAppDatabase(it.applicationContext)?.quizDao() }
+        //val user = User(0,user)
+         quizDao?.insertUser(user)
+         Log.d("!!!","$user")
+    }
+    /*fun saveUser(user: User) {
+        launch(Dispatchers.IO) {
+            quizDatabase.quizDao().insertUser(user)
+        }
+    }*/
 }
 
 
